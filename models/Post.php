@@ -28,6 +28,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['employee_id'], 'required'],
+            [['title'], 'required' ,'message'=>'{attribute} không để rỗng .'],
             [['employee_id'], 'integer'],
             [['name'], 'string', 'max' => 191],
         ];
@@ -41,6 +42,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'title' => 'Title',
             'employee_id' => 'Employee ID',
             'employeeName' => 'Employee Name'
         ];

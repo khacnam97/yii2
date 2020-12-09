@@ -1,7 +1,11 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap\Modal;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Employee;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PostSearch */
@@ -15,6 +19,63 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create ', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+            Modal::begin([
+                'header' => '<h2>Show Modal</h2>',
+                'toggleButton' => false,
+                'id' => 'modal-opened',
+                'size' => 'modal-lg'
+            ]);
+            ActiveForm::begin([
+                'action' => 'vote/vote',
+                'method' => 'post',
+                'id' => 'form'
+            ]);
+                echo '<div class="row">';
+                    echo '<div class="form-group col-md-6">';
+
+                        echo Html::input(
+                            'type: text',
+                            'name',
+                            '',
+                            [
+                                'placeholder' => 'Name',
+                                'class' => 'form-control'
+                            ]
+                        );
+                    echo '</div>';
+                    echo '<div class="form-group col-md-6">';
+                        echo Html::input(
+                            'type: text',
+                            'title',
+                            '',
+                            [
+                                'placeholder' => 'Title',
+                                'class' => 'form-control'
+                            ]
+                        );
+                    echo '</div>';
+                    echo '<div class="form-group col-md-6">';
+                        echo Html::activeDropDownList(
+                            ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control'));
+                    echo '</div>';
+                echo '</div>';
+
+                echo Html::submitButton(
+                    '<span class="glyphicon glyphicon-plus"></span>',
+                    [
+                        'class' => 'btn btn-success',
+                    ]
+                );
+            ActiveForm::End();
+
+
+
+        Modal::end();
+        ?>
+        <?= Html::button('Open Modal', ['id' => 'modal-btn', 'class' => 'btn btn-success']) ?>
+
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -55,9 +116,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
-    var checkboxall = $('#checkboxall').prop('checked');
+    $('#modal-btn').on('click', function (event) {
+        $('#modal-opened').modal('show');
+    });
+    // var checkboxall = $('#checkboxall').prop('checked');
     // $('#checkboxall').unload(function() {
     //
     // });
     // console.log(checkboxall);
+
 </script>

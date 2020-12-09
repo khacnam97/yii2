@@ -72,8 +72,10 @@ class PostSearch extends Post
             return $dataProvider;
         }
 
+        $query->andFilterWhere(['posts.id' => $this->id]);// where ==
+        $query->andFilterWhere(['like','posts.name' , $this->name]);// where like
         $query->joinWith(['employees' => function ($q) {
-            $q->where('employees.name LIKE "%' . $this->employeeName . '%"');
+            $q->andwhere('employees.name LIKE "%' . $this->employeeName . '%"');
         }]);
         // grid filtering conditions
 //        $query->andFilterWhere([
@@ -81,8 +83,8 @@ class PostSearch extends Post
 //        ]);
 
 //        $query->where('posts.id = $this->id');
-        $query->Where('posts.id ' == $this->id);
-        $query->Where('posts.name LIKE "%' . $this->name . '%"');
+//        $query->Where('posts.id' == $this->id);
+
 
         return $dataProvider;
     }

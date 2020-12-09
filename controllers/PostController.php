@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Employee;
+use app\models\User;
 use Yii;
 use app\models\Post;
 use app\models\PostSearch;
@@ -70,6 +71,10 @@ class PostController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        $faker = \Faker\Factory::create();
+
+
 
         return $this->render('create', [
             'model' => $model,

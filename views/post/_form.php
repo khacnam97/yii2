@@ -15,6 +15,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <div class="form-group dropdown">
         <?=  Html::activeDropDownList($model, 'employee_id',
             ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control'))
