@@ -38,11 +38,13 @@ class PostController extends Controller
     public function actionIndex()
     {
         $searchModel = new PostSearch();
+        $model = new Post();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'        => $model
         ]);
     }
 
@@ -71,16 +73,33 @@ class PostController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $name= $data['name'];
+            $model->name = $name;
 
-        $faker = \Faker\Factory::create();
-
-
+            $model->title= $data['title'];
+            $model->employee_id= $data['employee_id'];
+            $model->save();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return [
+//                'search' => $search,
+                'code' => 100,
+            ];
+        }
 
         return $this->render('create', [
             'model' => $model,
         ]);
     }
+    public function actionPost()
+    {
+        $model = new Post();
+        return $this->renderAjax('index', [
+            'model' => $model,
+        ]);
 
+    }
     /**
      * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
