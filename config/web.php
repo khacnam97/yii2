@@ -42,6 +42,9 @@ $config = [
                 ],
             ],
         ],
+        'view' => [
+            'class' => 'app\widgets\View'
+        ],
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
