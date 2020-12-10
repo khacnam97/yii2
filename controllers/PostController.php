@@ -31,18 +31,23 @@ class PostController extends Controller
         ];
     }
 
-    /**
+    /**employeName
      * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new PostSearch();
+        $employeName = Employee::find()->all();
+        $model = new Post();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'employeName' => $employeName,
+             'model' => $model,
+
         ]);
     }
 

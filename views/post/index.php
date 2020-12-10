@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         );
                     echo '</div>';
                     echo '<div class="form-group col-md-6">';
-                        echo Html::activeDropDownList(
+                        echo Html::activeDropDownList($model, 'employee_id',
                             ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control'));
                     echo '</div>';
                 echo '</div>';
