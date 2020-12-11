@@ -45,11 +45,16 @@ $config = [
         'view' => [
             'class' => 'app\widgets\View'
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // uncomment if you want to cache RBAC items hierarchy
+            // 'cache' => 'cache',
+        ],
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
+           'rules' => [
                 '' => 'site/index',
                 '<action>'=>'site/<action>',
             ],

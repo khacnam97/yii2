@@ -23,7 +23,6 @@ $this->registerCssFile( '@web/css/post.css' );
 
     <p>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Create ', ['create'], ['class' => 'btn btn-success']) ?>
         <?php
             Modal::begin([
                 'header' => '<h2>Show Modal</h2>',
