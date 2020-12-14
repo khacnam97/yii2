@@ -20,12 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             <?= $form->field($model, 'username') ?>
             <?= $form->field($model, 'email') ?>
-            <?= $form->field($model, 'email1') ?>
             <?= $form->field($model, 'password')->passwordInput() ?>
-            <?=  Html::activeDropDownList($model, 'permission',
+            <?=  Html::activeCheckboxList($model, 'permission',
                 ArrayHelper::map(\app\models\AuthItem::find()->all(), 'name', 'name'), array('class'=>'form-control'))
             ?>
-
             <div class="form-group">
                 <?= Html::submitButton('Signup', ['class' => 'btn btn-primary dddd', 'name' => 'signup-button', 'id' => 'btnsign']) ?>
             </div>

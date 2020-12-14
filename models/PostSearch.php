@@ -49,6 +49,7 @@ class PostSearch extends Post
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 10),
         ]);
 
         $dataProvider->setSort([

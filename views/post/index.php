@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Employee;
+use yii\widgets\LinkPager;
 
 
 /* @var $this yii\web\View */
@@ -57,9 +58,14 @@ $this->registerCssFile( '@web/css/post.css' );
                         ]
                         );
                         echo '</div>';
+
+
+
                     echo '<div class="form-group col-md-6">';
                         echo Html::activeDropDownList($model, 'employee_id',
-                        ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control','id' => 'employee_id'));
+                        ArrayHelper::map(Employee::find()->all(), 'id', 'name'),
+
+                            array('prompt'=>'---Select---','class'=>'form-control','id' => 'employee_id'));
                         echo '</div>';
                     echo '</div>';
 
@@ -77,12 +83,12 @@ $this->registerCssFile( '@web/css/post.css' );
         <?= Html::button('Open Modal', ['id' => 'modal-btn', 'class' => 'btn btn-success']) ?>
 
     </p>
-
+    <?= yii\jui\DatePicker::widget(['name' => 'attributeName']) ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
+
 
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

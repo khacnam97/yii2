@@ -16,7 +16,6 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $permission ;
-    public $email1;
 
     /**
      * @inheritdoc
@@ -52,9 +51,7 @@ class SignupForm extends Model
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            if ($user->save()) {
-//                return $user;
-            }
+            $user->save();
 
             $permisstionList = $_POST['SignupForm']['permission'];
             foreach ($permisstionList as $value)
@@ -64,7 +61,7 @@ class SignupForm extends Model
                 $newPermisstion->item_name = $value ;
                 $newPermisstion->save();
             }
-
+            return $user;
         }
 
         return null;

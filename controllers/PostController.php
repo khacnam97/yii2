@@ -8,8 +8,10 @@ use Yii;
 use app\models\Post;
 use app\models\PostSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -26,6 +28,37 @@ class PostController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['author'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['author'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['author'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['author'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['author'],
+                    ],
                 ],
             ],
         ];
@@ -56,6 +89,7 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -68,29 +102,35 @@ class PostController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Post();
+//        if(Yii::$app->user->can('createPost')){
+            $model = new Post();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-        if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->post();
-            $name= $data['name'];
-            $model->name = $name;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            if (Yii::$app->request->isAjax) {
+                $data = Yii::$app->request->post();
+                $name= $data['name'];
+                $model->name = $name;
 
-            $model->title= $data['title'];
-            $model->employee_id= $data['employee_id'];
-            $model->save();
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return [
+                $model->title= $data['title'];
+                $model->employee_id= $data['employee_id'];
+                $model->save();
+                \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return [
 //                'search' => $search,
-                'code' => 100,
-            ];
-        }
+                    'code' => 100,
+                ];
+            }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+//        }
+//        else{
+//            throw new ForbiddenHttpException;
+//        }
+
     }
     public function actionPost()
     {
@@ -109,16 +149,22 @@ class PostController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $employeName = Employee::find()->all();
+        if(Yii::$app->user->can('updatePost')){
+            $model = $this->findModel($id);
+            $employeName = Employee::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,'employeName' => $employeName,
+            ]);
+        }
+        else{
+            throw new ForbiddenHttpException;
         }
 
-        return $this->render('update', [
-            'model' => $model,'employeName' => $employeName,
-        ]);
     }
 
     /**
