@@ -4,17 +4,20 @@ namespace app\controllers;
 
 use app\models\AuthAssignment;
 use app\models\AuthItem;
+use app\models\Post;
+use app\models\PostSearch;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\ContactForm;
 use app\models\Auth;
-
+use yii\data\ActiveDataProvider;
 
 
 class SiteController extends Controller
@@ -132,7 +135,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new PostSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
     public function actionHello()
     {
@@ -215,5 +230,13 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    protected function findModel($id)
+    {
+        if (($model = Post::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
