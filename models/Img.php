@@ -30,8 +30,8 @@ class Img extends \yii\db\ActiveRecord
     {
         return [
             [['post_id'], 'required'],
-            [['created_at', 'updated_at'], 'integer'],
-            [['post_id', 'img_path'], 'string', 'max' => 255],
+            [['post_id', 'created_at', 'updated_at'], 'integer'],
+            [['img_path'], 'string', 'max' => 255],
         ];
     }
 

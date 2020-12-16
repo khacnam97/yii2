@@ -8,6 +8,7 @@ use yii\jui\InputWidget;
 use yii\bootstrap\Button;
 use dosamigos\ckeditor\CKEditor;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 /* @var $form yii\widgets\ActiveForm */
@@ -15,9 +16,11 @@ use dosamigos\ckeditor\CKEditor;
 
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'img_path')->fileInput() ?>
+
     <div class="form-group dropdown">
         <?=  Html::activeDropDownList($model, 'employee_id',
             ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control','style' =>'display:none'))

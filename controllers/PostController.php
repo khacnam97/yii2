@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Employee;
+use app\models\Img;
 use app\models\User;
 use Yii;
 use app\models\Post;
@@ -12,6 +13,7 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -104,8 +106,18 @@ class PostController extends Controller
     {
 //        if(Yii::$app->user->can('createPost')){
             $model = new Post();
+            $img = new Img();
+            if ($model->load(Yii::$app->request->post()) && $model->save() ) {
+                if ($model->validate()) {
+                    $nameImg = UploadedFile::getInstance($model, 'img_path');
+                    $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
+                    if ($nameImg->saveAs($path)){
+                        $img->img_path = $nameImg->baseName . '.' . $nameImg->extension;
+                        $img->post_id = $model->id;
+                        $img->save();
+                    }
+                }
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
             if (Yii::$app->request->isAjax) {
@@ -152,10 +164,38 @@ class PostController extends Controller
         if(Yii::$app->user->can('updatePost')){
             $model = $this->findModel($id);
             $employeName = Employee::find()->all();
+            $img = new Img();
+            $imgUpdate = (new \yii\db\Query())->select('id')->from('imgs')->where(['post_id' => $id])->one();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+                if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                    if(!$imgUpdate){
+                        if ($model->validate()) {
+                            $nameImg = UploadedFile::getInstance($model, 'img_path');
+                            $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
+                            if ($nameImg->saveAs($path)){
+                                $img->img_path = $nameImg->baseName . '.' . $nameImg->extension;
+                                $img->post_id = $model->id;
+                                $img->save();
+                            }
+                        }
+                    }
+                    else{
+                        $idImg =$imgUpdate['id'];
+                        $imgEdit = Img::findOne($idImg);
+                        if ($model->validate()) {
+                            $nameImg = UploadedFile::getInstance($model, 'img_path');
+                            $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
+                            if ($nameImg->saveAs($path)){
+                                $imgEdit->img_path = $nameImg->baseName . '.' . $nameImg->extension;
+                                $imgEdit->save();
+                            }
+                        }
+
+                    }
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
 
             return $this->render('update', [
                 'model' => $model,'employeName' => $employeName,
