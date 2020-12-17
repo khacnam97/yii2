@@ -6,7 +6,20 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Employee;
-
+use yii\widgets\LinkPager;
+//use yii\jui\DatePicker;
+use yii\jui\Accordion;
+use yii\jui\AutoComplete;
+use yii\jui\Dialog;
+use yii\jui\Draggable;
+use yii\jui\Droppable;
+use dosamigos\datepicker\DatePicker;
+use yii\bootstrap\Button;
+use yii\bootstrap\ButtonDropdown;
+use yii\bootstrap\ButtonGroup;
+use yii\bootstrap\Carousel;
+use yii\bootstrap\Collapse;
+use yii\bootstrap\Dropdown;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PostSearch */
@@ -16,8 +29,145 @@ $this->title = 'Posts';
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile( '@web/css/post.css' );
+//echo DatePicker::widget([
+//    'name'  => 'from_date',
+//    'value'  => '01-02-2020',
+//    //'language' => 'ru',
+//    'dateFormat' => 'yyyy-MM-dd',
+//]);
+//Dialog::begin([
+//    'clientOptions' => [
+//        'modal' => true,
+//    ],
+//]);
+//
+//echo 'Dialog contents here...';
+//
+//Dialog::end();
+//Droppable::begin([
+//    'clientOptions' => ['accept' => '.special'],
+//]);
+//
+//echo 'Droppable body here...';
+//
+//Droppable::end();
+
+echo Collapse::widget([
+    'items' => [
+        // equivalent to the above
+        [
+            'label' => 'Collapsible Group Item #1',
+            'content' => 'Anim pariatur cliche...',
+            // open its content by default
+            'contentOptions' => ['class' => 'in']
+        ],
+        // another group item
+        [
+            'label' => 'Collapsible Group Item #1',
+            'content' => 'Anim pariatur cliche...',
+//            'contentOptions' => [...],
+//            'options' => [...],
+        ],
+        // if you want to swap out .panel-body with .list-group, you may use the following
+        [
+            'label' => 'Collapsible Group Item #1',
+            'content' => [
+                'Anim pariatur cliche...',
+                'Anim pariatur cliche...'
+            ],
+//            'contentOptions' => [...],
+//            'options' => [...],
+            'footer' => 'Footer' // the footer label in list-group
+        ],
+    ]
+]);
+
+echo Carousel::widget([
+    'items' => [
+        // the item contains only the image
+        '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
+        // equivalent to the above
+        ['content' => '<img width="100%" src="https://halotravel.vn/wp-content/uploads/2020/07/thach_trangg_101029297_573874646879779_1794923475739360981_n.jpg"/>'],
+        // the item contains both the image and the caption
+        [
+            'content' => '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
+            'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
+            'options' => ['class' => 'carousel'],
+        ],
+    ]
+]);
+echo ButtonDropdown::widget([
+    'label' => 'Action',
+    'dropdown' => [
+        'items' => [
+            ['label' => 'DropdownA', 'url' => '/'],
+            ['label' => 'DropdownB', 'url' => '#'],
+        ],
+    ],
+]);
+
+echo Button::widget([
+    'label' => 'Action',
+    'options' => ['class' => 'btn-lg'],
+]);
+Draggable::begin([
+    'clientOptions' => ['grid' => [50, 20]],
+]);
+
+echo 'Draggable contents here...';
+
+Draggable::end();
+echo AutoComplete::widget([
+    'name' => 'country',
+    'clientOptions' => [
+        'source' => ['USA', 'RUS'],
+    ],
+    'options' =>[
+            'class' => 'form-control'
+    ]
+]);
+echo Accordion::widget([
+    'items' => [
+        [
+            'header' => 'Section 1',
+            'content' => 'Mauris mauris ante, blandit et, ultrices a, suscipit eget...',
+        ],
+        [
+            'header' => 'Section 2',
+            'headerOptions' => ['tag' => 'h3'],
+            'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus...',
+            'options' => ['tag' => 'div'],
+        ],
+    ],
+    'options' => ['tag' => 'div'],
+    'itemOptions' => ['tag' => 'div'],
+    'headerOptions' => ['tag' => 'h3'],
+    'clientOptions' => ['collapsible' => false],
+]);
 ?>
+<?= DatePicker::widget([
+    'name' => 'Test',
+    'value' => '02-16-2012',
+    'template' => '{addon}{input}',
+    'clientOptions' => [
+        'autoclose' => true,
+        'format' => 'dd-M-yyyy'
+    ]
+]);?>
+<div class="dropdown">
+    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Label <b class="caret"></b></a>
+    <?php
+    echo Dropdown::widget([
+        'items' => [
+            ['label' => 'DropdownA', 'url' => '/'],
+            ['label' => 'DropdownB', 'url' => '#'],
+        ],
+    ]);
+    ?>
+</div>
 <div class="post-index">
+    <?= yii\jui\DatePicker::widget(['name' => 'attributeName', 'dateFormat' => 'yyyy-MM-dd', 'value' => '02-03-2020','options' => ['class' => 'form-control']]) ?>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -57,9 +207,14 @@ $this->registerCssFile( '@web/css/post.css' );
                         ]
                         );
                         echo '</div>';
+
+
+
                     echo '<div class="form-group col-md-6">';
                         echo Html::activeDropDownList($model, 'employee_id',
-                        ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control','id' => 'employee_id'));
+                        ArrayHelper::map(Employee::find()->all(), 'id', 'name'),
+
+                            array('prompt'=>'---Select---','class'=>'form-control','id' => 'employee_id'));
                         echo '</div>';
                     echo '</div>';
 
@@ -79,17 +234,20 @@ $this->registerCssFile( '@web/css/post.css' );
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel'  => $searchModel,
+
 
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
+            'title',
+            'content',
             'employeeName',
+            'imgPathName',
             'columns'=>[
                 'attribute'=>'New Column',
                 'value'=>'employees.name',

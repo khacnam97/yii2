@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Employee;
 use yii\helpers\ArrayHelper;
+use yii\jui\InputWidget;
+use yii\bootstrap\Button;
+use dosamigos\ckeditor\CKEditor;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
@@ -12,15 +16,20 @@ use yii\helpers\ArrayHelper;
 
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'img_path')->fileInput() ?>
+
     <div class="form-group dropdown">
         <?=  Html::activeDropDownList($model, 'employee_id',
-            ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control'))
+            ArrayHelper::map(Employee::find()->all(), 'id', 'name'), array('class'=>'form-control','style' =>'display:none'))
         ?>
     </div>
+    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]) ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

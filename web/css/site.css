@@ -9,7 +9,9 @@ body {
     margin: 0 auto -60px;
     padding: 0 0 60px;
 }
-
+.summary {
+    display: none;
+}
 .wrap > .container {
     padding: 70px 15px 20px;
 }
@@ -112,4 +114,7 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+.carousel{
+    width: 100%;
 }

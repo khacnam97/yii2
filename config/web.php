@@ -12,6 +12,23 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => '2811805022434975',
+                    'clientSecret' => '5491521c118a3eaf513062b72ab32784',
+                    'attributeNames' => ['name', 'email', 'first_name', 'last_name'],
+                ],
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => '147408803562-4bk3o473ccg389ghaf6thvjsf7gm6ksf.apps.googleusercontent.com',
+                    'clientSecret' => 'ezQL3t35b0w8pZBrGil6Xhlj',
+                    'returnUrl' => 'http://localhost/projectyii2/web/auth?authclient=google',
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'R-IPv_C65-pWyP5i35oVd0O9Z14cuaUE',
@@ -47,8 +64,6 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            // uncomment if you want to cache RBAC items hierarchy
-            // 'cache' => 'cache',
         ],
         'db' => $db,
         'urlManager' => [

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "posts".
@@ -16,6 +17,7 @@ class Post extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $img_path;
     public static function tableName()
     {
         return 'posts';
@@ -31,6 +33,8 @@ class Post extends \yii\db\ActiveRecord
             [['title'], 'required' ,'message'=>'{attribute} không để rỗng .'],
             [['employee_id'], 'integer'],
             [['name'], 'string', 'max' => 191],
+            [['content'], 'string'],
+
         ];
     }
 
@@ -44,7 +48,9 @@ class Post extends \yii\db\ActiveRecord
             'name' => 'Name',
             'title' => 'Title',
             'employee_id' => 'Employee ID',
-            'employeeName' => 'Employee Name'
+            'employeeName' => 'Employee Name',
+            'content' => 'Content',
+            'imgPathName' => 'Img Path'
         ];
     }
     public function getEmployees()
@@ -55,4 +61,13 @@ class Post extends \yii\db\ActiveRecord
     public function getEmployeeName() {
         return $this->employees->name;
     }
+
+    public function getImgs()
+    {
+        return $this->hasOne(Img::class, ['post_id' => 'id']);
+    }
+    public function getImgPathName() {
+        return (empty($this->imgs)) ? '' : $this->imgs->img_path;
+    }
+
 }

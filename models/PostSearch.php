@@ -15,13 +15,15 @@ class PostSearch extends Post
      * {@inheritdoc}
      */
     public $employeeName;
+//    public $imgPathName;
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
             [['name'], 'safe'],
-            [['employeeName'], 'safe']
+            [['employeeName'], 'safe'],
+//            [['imgPathName'], 'safe']
         ];
     }
 
@@ -49,6 +51,7 @@ class PostSearch extends Post
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 12),
         ]);
 
         $dataProvider->setSort([
