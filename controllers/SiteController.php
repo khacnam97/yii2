@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\AuthAssignment;
 use app\models\AuthItem;
+use app\models\Photo;
 use app\models\Post;
 use app\models\PostSearch;
 use app\models\User;
@@ -137,10 +138,11 @@ class SiteController extends Controller
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $photos =  (new \yii\db\Query())->select('photo_path')->from('photos')->all();
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
+            'photos' => $photos
         ]);
     }
     public function actionView($id)

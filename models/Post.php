@@ -50,7 +50,7 @@ class Post extends \yii\db\ActiveRecord
             'employee_id' => 'Employee ID',
             'employeeName' => 'Employee Name',
             'content' => 'Content',
-            'img_path' => 'Img Path'
+            'imgPathName' => 'Img Path'
         ];
     }
     public function getEmployees()
@@ -64,10 +64,10 @@ class Post extends \yii\db\ActiveRecord
 
     public function getImgs()
     {
-        return $this->hasOne(Img::className(), ['post_id' => 'id']);
+        return $this->hasOne(Img::class, ['post_id' => 'id']);
     }
-    public function getImgPath() {
-        return $this->imgs->img_path;
+    public function getImgPathName() {
+        return (empty($this->imgs)) ? '' : $this->imgs->img_path;
     }
 
 }

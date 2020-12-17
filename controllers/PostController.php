@@ -110,11 +110,13 @@ class PostController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save() ) {
                 if ($model->validate()) {
                     $nameImg = UploadedFile::getInstance($model, 'img_path');
-                    $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
-                    if ($nameImg->saveAs($path)){
-                        $img->img_path = $nameImg->baseName . '.' . $nameImg->extension;
-                        $img->post_id = $model->id;
-                        $img->save();
+                    if($nameImg){
+                        $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
+                        if ($nameImg->saveAs($path)){
+                            $img->img_path = $nameImg->baseName . '.' . $nameImg->extension;
+                            $img->post_id = $model->id;
+                            $img->save();
+                        }
                     }
                 }
 

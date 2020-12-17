@@ -15,7 +15,7 @@ class PostSearch extends Post
      * {@inheritdoc}
      */
     public $employeeName;
-    public $imgPath;
+//    public $imgPathName;
 
     public function rules()
     {
@@ -23,7 +23,7 @@ class PostSearch extends Post
             [['id'], 'integer'],
             [['name'], 'safe'],
             [['employeeName'], 'safe'],
-            [['imgPath'], 'safe']
+//            [['imgPathName'], 'safe']
         ];
     }
 

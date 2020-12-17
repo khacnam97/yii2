@@ -7,7 +7,18 @@ use yii\helpers\Html;
 
 <li class="one_quarter">
     <article>
-        <figure><a href="#"><img class="demo" src="images/demo/348x261.png" alt=""></a>
+        <figure>
+            <a href="#">
+                <?php
+                    if ($model->imgPathName){
+                        $img = $model->imgPathName ;
+                    }
+                    else{
+                        $img = '348x261.png';
+                    }
+                ?>
+                <img class="demo"  src="<?= Yii::$app->request->baseUrl . '/uploads/' . $img ?>" alt="">
+            </a>
             <figcaption>
                 <time datetime="2045-04-05T08:15+00:00"><strong>05</strong> <em>Apr</em></time>
             </figcaption>
@@ -18,7 +29,6 @@ use yii\helpers\Html;
                 <li><i class="fas fa-user"></i> <a href="#">Admin</a></li>
                 <li><i class="fas fa-tags"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
             </ul>
-            <div class="dd"><?= $model->imgPath ?></div>
              <div class="cut"><?= $model->content?></div>
             <footer><a class="btn" href="<?= Url::to(['site/view', 'id' => $model->id])?>">Read More</a></footer>
         </div>

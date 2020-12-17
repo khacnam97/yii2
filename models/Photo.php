@@ -31,7 +31,8 @@ class Photo extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'required'],
             [['created_at', 'updated_at'], 'integer'],
-            [['user_id', 'photo_path'], 'string', 'max' => 255],
+            [['user_id'], 'string', 'max' => 255],
+            [['photo_path'], 'file',  'maxFiles' => 10],
         ];
     }
 
@@ -48,4 +49,15 @@ class Photo extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+//    public function upload()
+//    {
+//        if ($this->validate()) {
+//            foreach ($this->photo_path as $file) {
+//                $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }

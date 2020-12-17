@@ -247,6 +247,7 @@ echo Accordion::widget([
             'title',
             'content',
             'employeeName',
+            'imgPathName',
             'columns'=>[
                 'attribute'=>'New Column',
                 'value'=>'employees.name',
