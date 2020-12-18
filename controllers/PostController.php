@@ -173,6 +173,7 @@ class PostController extends Controller
                     if(!$imgUpdate){
                         if ($model->validate()) {
                             $nameImg = UploadedFile::getInstance($model, 'img_path');
+
                             $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
                             if ($nameImg->saveAs($path)){
                                 $img->img_path = $nameImg->baseName . '.' . $nameImg->extension;
@@ -186,13 +187,14 @@ class PostController extends Controller
                         $imgEdit = Img::findOne($idImg);
                         if ($model->validate()) {
                             $nameImg = UploadedFile::getInstance($model, 'img_path');
-                            $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
-                            if ($nameImg->saveAs($path)){
-                                $imgEdit->img_path = $nameImg->baseName . '.' . $nameImg->extension;
-                                $imgEdit->save();
+                            if ($nameImg){
+                                $path ='uploads/' . $nameImg->baseName . '.' . $nameImg->extension;
+                                if ($nameImg->saveAs($path)){
+                                    $imgEdit->img_path = $nameImg->baseName . '.' . $nameImg->extension;
+                                    $imgEdit->save();
+                                }
                             }
                         }
-
                     }
 
                     return $this->redirect(['view', 'id' => $model->id]);

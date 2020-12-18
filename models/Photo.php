@@ -33,6 +33,8 @@ class Photo extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'integer'],
             [['user_id'], 'string', 'max' => 255],
             [['photo_path'], 'file',  'maxFiles' => 10],
+            [['title'], 'string', 'max' => 255],
+            [['group'], 'string', 'max' => 191],
         ];
     }
 
@@ -45,6 +47,8 @@ class Photo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'photo_path' => 'Photo Path',
+            'title' => 'Title',
+            'group' => 'Group',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
