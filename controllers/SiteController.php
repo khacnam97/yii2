@@ -138,7 +138,7 @@ class SiteController extends Controller
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $photos =  (new \yii\db\Query())->select('photo_path')->from('photos')->all();
+        $photos =  (new \yii\db\Query())->select(['photo_path','title','group'])->groupBy('group')->from('photos')->all();
         return $this->render('index', [
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
@@ -149,6 +149,12 @@ class SiteController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionViewPhoto($id)
+    {
+        return $this->render('view_photo', [
+
         ]);
     }
     public function actionHello()

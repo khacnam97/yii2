@@ -116,5 +116,6 @@ a.desc:after {
     outline: none;
 }
 .carousel{
+    top: 70px;
     width: 100%;
 }

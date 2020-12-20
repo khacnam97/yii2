@@ -17,18 +17,10 @@ $this->registerJsFile( '@web/layout/scripts/jquery.mobilemenu.js' );
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="wrapper row3">
-     <main class="hoc container clear">
-         <ul class="nospace group overview">
-            <?php
-                foreach ($photos as $photo){
-            ?>
-                <li class="one_third">
-                        <img style=" height: 200px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $photo['photo_path'] ?>" class="card-img-top">
-                </li>
-            <?php
-                }
-            ?>
-         </ul>
-     </main>
+    <main class="hoc container clear">
+        <ul class="nospace group overview">
 
+
+        </ul>
+    </main>
 </div>

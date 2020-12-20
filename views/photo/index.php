@@ -34,13 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn',
                 'buttons'=>[
                     'view'=>function ($url, $model) {
-
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['photo/view', 'id' => $model->user_id], ['class' => 'profile-link']);
                     },
-//                    'update'=>function ($url, $model) {
-//                        $t = 'index.php?r=site/update&id='.$model->id;
-//                        return Html::button('<span class="glyphicon glyphicon-pencil"></span>', ['value'=>Url::to($t), 'class' => 'btn btn-default btn-xs custom_button']);
-//                    },
+
                 ],
             ],
         ],

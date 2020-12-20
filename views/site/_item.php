@@ -17,7 +17,7 @@ use yii\helpers\Html;
                         $img = '348x261.png';
                     }
                 ?>
-                <img class="demo"  src="<?= Yii::$app->request->baseUrl . '/uploads/' . $img ?>" alt="">
+                <img class="demo" style="height: 261px; width: 348px;"  src="<?= Yii::$app->request->baseUrl . '/uploads/' . $img ?>" alt="">
             </a>
             <figcaption>
                 <time datetime="2045-04-05T08:15+00:00"><strong>05</strong> <em>Apr</em></time>

@@ -69,26 +69,19 @@ class PhotoController extends Controller
     {
         $model = new Photo();
 
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        }
-//        $model = new UploadForm();
-
         if ($model->load(Yii::$app->request->post())) {
-//            if ($model->validate()) {
                $files = UploadedFile::getInstances($model, 'photo_path');
+               $title =$model->title;
                 foreach ($files as $file) {
-//                    $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
-//                    $namePhoto = UploadedFile::getInstance($file, 'photo_path');
-
                         $path ='uploads/' . $file->baseName . '.' . $file->extension;
                         if ($file->saveAs($path)){
                             $photopath = $file->baseName . '.' . $file->extension;
                             $userId = Yii::$app->user->identity->id;
-                            Yii::$app->db->createCommand()->insert('photos', ['photo_path' => $photopath ,'user_id' => $userId])->execute();
+                            $time=time();
+                            $group = Yii::$app->user->identity->id .'_'. $time;
+                            Yii::$app->db->createCommand()->insert('photos', ['photo_path' => $photopath ,'user_id' => $userId,'group' => $group,'title' => $title])->execute();
                         }
                 }
-//            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -107,6 +100,7 @@ class PhotoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $photos =  (new \yii\db\Query())->select('photo_path')->from('photos')->where(['user_id' => $id])->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -114,6 +108,7 @@ class PhotoController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'photos' => $photos
         ]);
     }
 

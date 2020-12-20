@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\ListView;
 use yii\bootstrap\Carousel;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $photos  */
@@ -62,7 +63,6 @@ $url = Yii::getAlias("@web") . '/img/';
                     [
                     'content' => '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
                     'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
-                    'options' => ['class' => 'carousel'],
                     ],
                     ]
                 ]);
@@ -108,9 +108,9 @@ $url = Yii::getAlias("@web") . '/img/';
                 //                                    var_dump($photo['photo_path']);
                 ?>
                 <li class="one_third">
-                    <figure><a href="#"><img src="<?= Yii::$app->request->baseUrl . '/uploads/' . $photo['photo_path'] ?>" alt=""></a>
+                    <figure><a href="<?= Url::toRoute(['site/view_photo', 'id' => $photo['group']])?>"><img style="height: 261px; width: 348px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $photo['photo_path'] ?>" alt=""></a>
                         <figcaption>
-                            <h6 class="heading">Dapibus pede tristique</h6>
+                            <h6 class="heading"><?=$photo['title']?></h6>
                             <p>Congue quam erat et dui morbi at sapien non enim blandit.</p>
                         </figcaption>
                     </figure>
