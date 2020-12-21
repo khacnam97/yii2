@@ -14,5 +14,4 @@ use yii\widgets\DetailView;
     <h2><?= Html::encode($model->title)?></h2>
     <p><?= $model->content?></p>
 
-
 </div>

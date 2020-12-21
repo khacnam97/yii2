@@ -19,13 +19,13 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <input type="text" value="" style="display: none ;"  class="form-control" id="p1" name="p1">
     </div>
-    <div class="wrapper row3">
+    <div class="wrapper row3" style="display: none;">
         <main class="hoc container clear">
-            <ul class="nospace group overview">
-                    <li class="one_third">
-                        <img style=" height: 200px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $model['photo_path'] ?>" class="card-img-top">
-                    </li>
-            </ul>
+<!--            <ul class="nospace group overview">-->
+<!--                    <li class="one_third">-->
+                        <img style="height: 200px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $model['photo_path'] ?>" class="card-img-top">
+<!--                    </li>-->
+<!--            </ul>-->
         </main>
 
     </div>
@@ -37,6 +37,7 @@ use yii\widgets\ActiveForm;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
+    var kt =
     $('#gallery-photo-add').on('click', function() {
         $('.gallery img').hide();
     });
@@ -64,7 +65,9 @@ use yii\widgets\ActiveForm;
         <?php if($model->id) {$idPhoto = $model->id;}
         else $idPhoto ="0";?>;
         var idImg  = <?=$idPhoto ?>;
+
         if(idImg){
+            $('.row3').show();
             $('.delete-img').show();
             $('.'+idImg).click(function(){
                 console.log(idImg);

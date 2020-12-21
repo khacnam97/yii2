@@ -52,117 +52,117 @@ $this->registerCssFile( '@web/css/post.css' );
 //
 //Droppable::end();
 
-echo Collapse::widget([
-    'items' => [
-        // equivalent to the above
-        [
-            'label' => 'Collapsible Group Item #1',
-            'content' => 'Anim pariatur cliche...',
-            // open its content by default
-            'contentOptions' => ['class' => 'in']
-        ],
-        // another group item
-        [
-            'label' => 'Collapsible Group Item #1',
-            'content' => 'Anim pariatur cliche...',
-//            'contentOptions' => [...],
-//            'options' => [...],
-        ],
-        // if you want to swap out .panel-body with .list-group, you may use the following
-        [
-            'label' => 'Collapsible Group Item #1',
-            'content' => [
-                'Anim pariatur cliche...',
-                'Anim pariatur cliche...'
-            ],
-//            'contentOptions' => [...],
-//            'options' => [...],
-            'footer' => 'Footer' // the footer label in list-group
-        ],
-    ]
-]);
+//echo Collapse::widget([
+//    'items' => [
+//        // equivalent to the above
+//        [
+//            'label' => 'Collapsible Group Item #1',
+//            'content' => 'Anim pariatur cliche...',
+//            // open its content by default
+//            'contentOptions' => ['class' => 'in']
+//        ],
+//        // another group item
+//        [
+//            'label' => 'Collapsible Group Item #1',
+//            'content' => 'Anim pariatur cliche...',
+////            'contentOptions' => [...],
+////            'options' => [...],
+//        ],
+//        // if you want to swap out .panel-body with .list-group, you may use the following
+//        [
+//            'label' => 'Collapsible Group Item #1',
+//            'content' => [
+//                'Anim pariatur cliche...',
+//                'Anim pariatur cliche...'
+//            ],
+////            'contentOptions' => [...],
+////            'options' => [...],
+//            'footer' => 'Footer' // the footer label in list-group
+//        ],
+//    ]
+//]);
 
-echo Carousel::widget([
-    'items' => [
-        // the item contains only the image
-        '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
-        // equivalent to the above
-        ['content' => '<img width="100%" src="https://halotravel.vn/wp-content/uploads/2020/07/thach_trangg_101029297_573874646879779_1794923475739360981_n.jpg"/>'],
-        // the item contains both the image and the caption
-        [
-            'content' => '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
-            'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
-            'options' => ['class' => 'carousel'],
-        ],
-    ]
-]);
-echo ButtonDropdown::widget([
-    'label' => 'Action',
-    'dropdown' => [
-        'items' => [
-            ['label' => 'DropdownA', 'url' => '/'],
-            ['label' => 'DropdownB', 'url' => '#'],
-        ],
-    ],
-]);
-
-echo Button::widget([
-    'label' => 'Action',
-    'options' => ['class' => 'btn-lg'],
-]);
-Draggable::begin([
-    'clientOptions' => ['grid' => [50, 20]],
-]);
-
-echo 'Draggable contents here...';
-
-Draggable::end();
-echo AutoComplete::widget([
-    'name' => 'country',
-    'clientOptions' => [
-        'source' => ['USA', 'RUS'],
-    ],
-    'options' =>[
-            'class' => 'form-control'
-    ]
-]);
-echo Accordion::widget([
-    'items' => [
-        [
-            'header' => 'Section 1',
-            'content' => 'Mauris mauris ante, blandit et, ultrices a, suscipit eget...',
-        ],
-        [
-            'header' => 'Section 2',
-            'headerOptions' => ['tag' => 'h3'],
-            'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus...',
-            'options' => ['tag' => 'div'],
-        ],
-    ],
-    'options' => ['tag' => 'div'],
-    'itemOptions' => ['tag' => 'div'],
-    'headerOptions' => ['tag' => 'h3'],
-    'clientOptions' => ['collapsible' => false],
-]);
+//echo Carousel::widget([
+//    'items' => [
+//        // the item contains only the image
+//        '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
+//        // equivalent to the above
+//        ['content' => '<img width="100%" src="https://halotravel.vn/wp-content/uploads/2020/07/thach_trangg_101029297_573874646879779_1794923475739360981_n.jpg"/>'],
+//        // the item contains both the image and the caption
+//        [
+//            'content' => '<img width="100%" src="https://znews-photo.zadn.vn/w1024/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg"/>',
+//            'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
+//            'options' => ['class' => 'carousel'],
+//        ],
+//    ]
+//]);
+//echo ButtonDropdown::widget([
+//    'label' => 'Action',
+//    'dropdown' => [
+//        'items' => [
+//            ['label' => 'DropdownA', 'url' => '/'],
+//            ['label' => 'DropdownB', 'url' => '#'],
+//        ],
+//    ],
+//]);
+//
+//echo Button::widget([
+//    'label' => 'Action',
+//    'options' => ['class' => 'btn-lg'],
+//]);
+//Draggable::begin([
+//    'clientOptions' => ['grid' => [50, 20]],
+//]);
+//
+//echo 'Draggable contents here...';
+//
+//Draggable::end();
+//echo AutoComplete::widget([
+//    'name' => 'country',
+//    'clientOptions' => [
+//        'source' => ['USA', 'RUS'],
+//    ],
+//    'options' =>[
+//            'class' => 'form-control'
+//    ]
+//]);
+//echo Accordion::widget([
+//    'items' => [
+//        [
+//            'header' => 'Section 1',
+//            'content' => 'Mauris mauris ante, blandit et, ultrices a, suscipit eget...',
+//        ],
+//        [
+//            'header' => 'Section 2',
+//            'headerOptions' => ['tag' => 'h3'],
+//            'content' => 'Sed non urna. Phasellus eu ligula. Vestibulum sit amet purus...',
+//            'options' => ['tag' => 'div'],
+//        ],
+//    ],
+//    'options' => ['tag' => 'div'],
+//    'itemOptions' => ['tag' => 'div'],
+//    'headerOptions' => ['tag' => 'h3'],
+//    'clientOptions' => ['collapsible' => false],
+//]);
 ?>
-<?= DatePicker::widget([
-    'name' => 'Test',
-    'value' => '02-16-2012',
-    'template' => '{addon}{input}',
-    'clientOptions' => [
-        'autoclose' => true,
-        'format' => 'dd-M-yyyy'
-    ]
-]);?>
+<!--//= DatePicker::widget([-->
+<!--//    'name' => 'Test',-->
+<!--//    'value' => '02-16-2012',-->
+<!--//    'template' => '{addon}{input}',-->
+<!--//    'clientOptions' => [-->
+<!--//        'autoclose' => true,-->
+<!--//        'format' => 'dd-M-yyyy'-->
+<!--//    ]-->
+<!--//]);-->
 <div class="dropdown">
-    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Label <b class="caret"></b></a>
+<!--    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Label <b class="caret"></b></a>-->
     <?php
-    echo Dropdown::widget([
-        'items' => [
-            ['label' => 'DropdownA', 'url' => '/'],
-            ['label' => 'DropdownB', 'url' => '#'],
-        ],
-    ]);
+//    echo Dropdown::widget([
+//        'items' => [
+//            ['label' => 'DropdownA', 'url' => '/'],
+//            ['label' => 'DropdownB', 'url' => '#'],
+//        ],
+//    ]);
     ?>
 </div>
 <div class="post-index">
@@ -242,27 +242,26 @@ echo Accordion::widget([
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
+//            'id',
             'title',
             'content',
-            'employeeName',
+//            'employeeName',
             'imgPathName',
-            'columns'=>[
-                'attribute'=>'New Column',
-                'value'=>'employees.name',
-                'filter' => '<input type="text">',
-            ],
-            [
-                'format' => 'raw',
-//                'format' => 'html',
-                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
-                'attribute'=>'New Column1',
-                'value' => function ($data) {
-                    return '<input type="checkbox" class="form-check-input" id="checkboxall">'; // $data['name'] for array data, e.g. using SqlDataProvider.
-                },
-                'filter' => '<input type="checkbox" class="form-check-input" id="checkboxall">',
-            ],
+//            'columns'=>[
+//                'attribute'=>'New Column',
+//                'value'=>'employees.name',
+//                'filter' => '<input type="text">',
+//            ],
+//            [
+//                'format' => 'raw',
+////                'format' => 'html',
+//                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+//                'attribute'=>'New Column1',
+//                'value' => function ($data) {
+//                    return '<input type="checkbox" class="form-check-input" id="checkboxall">'; // $data['name'] for array data, e.g. using SqlDataProvider.
+//                },
+//                'filter' => '<input type="checkbox" class="form-check-input" id="checkboxall">',
+//            ],
             //OR This
 //            new_column,
             ['class' => 'yii\grid\ActionColumn'],
