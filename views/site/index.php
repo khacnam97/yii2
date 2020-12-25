@@ -24,14 +24,13 @@ $url = Yii::getAlias("@web") . '/img/';
     }
 </style>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+<!--    <div class="jumbotron">-->
+<!--        <h1>Congratulations!</h1>-->
+<!---->
+<!--        <p class="lead">You have successfully created your Yii-powered application.</p>-->
+<!---->
+<!--        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>-->
+<!--    </div>-->
     <div class="wrapper row2">
         <section id="latest" class="hoc container clear">
             <!-- ################################################################################################ -->
@@ -108,7 +107,7 @@ $url = Yii::getAlias("@web") . '/img/';
                 //                                    var_dump($photo['photo_path']);
                 ?>
                 <li class="one_third">
-                    <figure><a href="<?= Url::toRoute(['site/view_photo', 'id' => $photo['group']])?>"><img style="height: 261px; width: 348px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $photo['photo_path'] ?>" alt=""></a>
+                    <figure><a href="<?= Url::toRoute(['site/view-photo', 'id' =>$photo['group']])?>"><img style="height: 261px; width: 348px;" src="<?= Yii::$app->request->baseUrl . '/uploads/' . $photo['photo_path'] ?>" alt=""></a>
                         <figcaption>
                             <h6 class="heading"><?=$photo['title']?></h6>
                             <p>Congue quam erat et dui morbi at sapien non enim blandit.</p>
@@ -124,3 +123,4 @@ $url = Yii::getAlias("@web") . '/img/';
     </div>
 
 </div>
+<a id="backtotop" style="text-decoration: none;"><i class="fas fa-chevron-up"></i></a>

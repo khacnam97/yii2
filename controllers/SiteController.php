@@ -23,6 +23,7 @@ use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
+    public $renderFooter=false;
     /**
      * {@inheritdoc}
      */
@@ -153,8 +154,11 @@ class SiteController extends Controller
     }
     public function actionViewPhoto($id)
     {
-        return $this->render('view_photo', [
-
+        $photos =  (new \yii\db\Query())->select(['photo_path','title','group'])->from('photos')->where(['group' => $id])->all();
+        $titles =  (new \yii\db\Query())->select(['title'])->groupBy('group')->from('photos')->where(['group' => $id])->all();
+        return $this->render('view-photo', [
+                'photos' => $photos,
+                'titles'  => $titles
         ]);
     }
     public function actionHello()
