@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\File;
 use Yii;
 use app\models\Directory;
 use app\models\DirectorySearch;
@@ -49,14 +50,22 @@ class DirectoryController extends Controller
     }
     function buildTree(array $data, $parentId = 0) {
         $branch = array();
-
         foreach ($data as $element) {
             if ($element['parentId'] == $parentId) {
+                $soFile = File::find()->where(['directoryId' => $element['id']])->count();
                 $children = $this->buildTree($data, $element['id']);
+                $childrenCount = 0;
+//                $tong = $soFile + $a;
                 if ($children) {
                     $element['children'] = $children;
+                    foreach ($children as $child) {
+                        $childrenCount += $child['count'];
+                    }
                 }
-                $branch[] = $element;
+
+                $element['count'] = $soFile + $childrenCount;
+
+                $branch[] = $element ;
             }
         }
         return $branch;
