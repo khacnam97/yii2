@@ -8,7 +8,8 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $menu yii\web\View */
 /* @var $menuItem yii\web\View */
-/* @var $list_cat yii\web\View */
+/* @var $list_cat [] */
+/* @var $list_menu [] */
 $this->title = 'Menus';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -33,6 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo $list_cat;
                     ?>
                 </ul>
+
+            </div>
+
+            <div id="navbar" class="collapse navbar-collapse">
+<!--                <ul class="nav navbar-nav">-->
+                    <?php
+                    foreach ($list_menu as $child) {
+                        echo $this->render('_item',['item' => $child]);
+                    }
+                    ?>
+<!--                </ul>-->
             </div>
             <!--/.nav-collapse -->
         </div>
@@ -42,40 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </ul>
 
-<nav class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Page 1-1</a></li>
-                            <li><a href="#">Page 1-2</a></li>
-                            <li><a href="#">Page 1-3</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
-                </ul>
-            </li>
-            <?php foreach ($menu as $item) {?>
-            <?php if ($item['parent'] ==0) { ?>
-                <li class="dropdown"><a  data-toggle="dropdown" href="#"><?php echo $item['name']?> </a>
-                    <ul class="dropdown-menu">
-                        <?php foreach ($menuItem as $menuitems) {?>
-                            <?php  if($item['id'] == $menuitems['parent']) {?>
-                                 <li><a href="#"><?php  echo $menuitems['name']?></a></li>
-                            <?php }?>
-                        <?php }?>
-                    </ul>
-                </li>
-                <?php }?>
-            <?php } ?>
-        </ul>
-</nav>
 
 
 <div class="menu-index">

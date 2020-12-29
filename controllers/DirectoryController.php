@@ -54,7 +54,9 @@ class DirectoryController extends Controller
         foreach ($data as $element) {
             if ($element['parentId'] == $parentId) {
                 $soFile = File::find()->where(['directoryId' => $element['id']])->count();
+
                 $children = $this->buildTree($data, $element['id']);
+
                 $childrenCount = 0;
 //                $tong = $soFile + $a;
                 if ($children) {
@@ -65,9 +67,12 @@ class DirectoryController extends Controller
                 }
 
                 $element['count'] = $soFile + $childrenCount;
+                $element['countElment'] = $soFile ;
+
 
                 $branch[] = $element ;
             }
+
         }
         return $branch;
     }
@@ -79,11 +84,13 @@ class DirectoryController extends Controller
         $directory = (new \yii\db\Query())->select('*')->from('directory')->all();
         $list_cat = $this->actionDatatree($directory, 0,0);
         $foder =$this->buildTree($directory, 0);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'list_cat' => $list_cat,
-            'foder'   => $foder
+            'foder'   => $foder,
+
         ]);
     }
 
