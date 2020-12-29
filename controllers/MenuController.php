@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\File;
 use Yii;
 use app\models\Menu;
 use app\models\MenuSearch;
@@ -83,6 +84,23 @@ class MenuController extends Controller
         }
         return $menu_html;
     }
+    function buildTree(array $data, $parentId = 0) {
+        $branch = array();
+        foreach ($data as $element) {
+            if ($element['parent'] == $parentId) {
+
+                $children = $this->buildTree($data, $element['id']);
+
+                $childrenCount = 0;
+                if ($children) {
+                    $element['children'] = $children;
+                }
+                $branch[] = $element ;
+            }
+
+        }
+        return $branch;
+    }
     public function actionIndex()
     {
         $searchModel = new MenuSearch();
@@ -92,12 +110,14 @@ class MenuController extends Controller
         $menuItem = (new \yii\db\Query())->select('*')->from('menu')->where(['not', ['parent' => null]])->all();
 //        $list_cat = $this->actionDatatree($menu, 0,0);
         $list_cat = $this->bootstrap_menu($menu, 0,);
+        $list_menu = $this->buildTree($menu, 0,);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'menu' => $menu,
             'list_cat' => $list_cat,
-            'menuItem' => $menuItem
+            'menuItem' => $menuItem,
+            'list_menu' => $list_menu
         ]);
     }
 
