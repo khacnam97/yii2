@@ -13,9 +13,27 @@ use yii\grid\GridView;
 $this->title = 'Menus';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.children {
+    display :none ;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;left:-100%;margin-top:-6px;
+}
+/* rotate caret on hover */
+.dropdown-menu >li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+} 
+</style>
 
-
-<ul>
+<ul class ="navbar-nav nav-pills nav-fill">
 
     <nav class="navbar navbar-default ">
         <div class="container">
@@ -37,15 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
 
-            <div id="navbar" class="collapse navbar-collapse">
-<!--                <ul class="nav navbar-nav">-->
-                    <?php
-                    foreach ($list_menu as $child) {
-                        echo $this->render('_item',['item' => $child]);
-                    }
-                    ?>
-<!--                </ul>-->
-            </div>
+           
             <!--/.nav-collapse -->
         </div>
     </nav>
@@ -53,32 +63,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </ul>
+<ul class ="navbar-nav nav-pills nav-fill">
 
+    <nav class="navbar navbar-default ">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">The site</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <?php
+                  
+                        foreach ($list_menu as $child) {
+                            echo $this->render('_item',['item' => $child ]);
+                        }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-
-<div class="menu-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Menu', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'parent',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
-</div>

@@ -81,11 +81,6 @@ $this->params['breadcrumbs'][] = $this->title;
             echo $this->render('_item',['item' => $child]);
         }
         ?>
-
-
-
-
-
 </div>
 
 <script type="text/javascript">
