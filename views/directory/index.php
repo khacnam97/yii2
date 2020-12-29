@@ -15,7 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="directory-index">
     <ul>
         <?php
+        var_dump ($foder);
         foreach($foder as $item1){
+            // if (){
+            //     echo $item1['name'];
+            // }
             echo $item1['name'];
         }
         foreach($list_cat as $item){
