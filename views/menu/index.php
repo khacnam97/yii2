@@ -16,6 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <style>
 .navbar-nav li:hover > ul.dropdown-menu {
     display: block;
+   
+}
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 50px;
 }
 .dropdown-submenu {
     position:relative;

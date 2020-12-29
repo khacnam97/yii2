@@ -4,7 +4,7 @@
 
 ?>
 
-<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $item['name'] ?></a>
+<li class="dropdown-submenu"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $item['name'] ?></a>
 
     <?php
     
