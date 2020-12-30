@@ -109,8 +109,8 @@ class MenuController extends Controller
         $menu = (new \yii\db\Query())->select('*')->from('menu')->all();
         $menuItem = (new \yii\db\Query())->select('*')->from('menu')->where(['not', ['parent' => null]])->all();
 //        $list_cat = $this->actionDatatree($menu, 0,0);
-        $list_cat = $this->bootstrap_menu($menu, 0,);
-        $list_menu = $this->buildTree($menu, 0,);
+        $list_cat = $this->bootstrap_menu($menu, 0);
+        $list_menu = $this->buildTree($menu, 0);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

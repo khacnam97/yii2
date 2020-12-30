@@ -50,6 +50,7 @@ class DirectoryController extends Controller
     }
     function buildTree(array $data, $parentId = 0) {
         $branch = array();
+       
         foreach ($data as $element) {
             if ($element['parentId'] == $parentId) {
                 $soFile = File::find()->where(['directoryId' => $element['id']])->count();

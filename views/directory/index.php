@@ -76,15 +76,11 @@ $this->params['breadcrumbs'][] = $this->title;
          </div>
      </div>
         <?php
+
         foreach ($foder as $child) {
             echo $this->render('_item',['item' => $child]);
         }
         ?>
-
-
-
-
-
 </div>
 
 <script type="text/javascript">
